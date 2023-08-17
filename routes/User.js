@@ -70,15 +70,16 @@ router.delete('/users/:id', async (req, res) => {
 
 router.put('/users/:id', async (req, res) => {
   try {
-    const {userId} = req.body
+    const userId = req.params.id
     const updatedFields = {};
+    console.log(userId);
 
   // Check for updated fields in the request body and add them to the updatedFields object
   if (req.body.first_name) {
-    updatedFields.first_name = req.body.first_name;
+    updatedFields.firstName = req.body.firstName;
   }
   if (req.body.last_name) {
-    updatedFields.last_name = req.body.last_name;
+    updatedFields.lastName = req.body.lastName;
   }
   if (req.body.email) {
     updatedFields.email = req.body.email;
@@ -87,13 +88,7 @@ router.put('/users/:id', async (req, res) => {
     updatedFields.gender = req.body.gender;
   }
   if (req.body.avatar) {
-    updatedFields.avatar = req.body.avatar;
-  }
-  if (req.body.domain) {
-    updatedFields.domain = req.body.domain;
-  }
-  if (req.body.available !== undefined) {
-    updatedFields.available = req.body.available;
+    updatedFields.phone = req.body.phone;
   }
   const user = await User.findByIdAndUpdate(
     userId,
